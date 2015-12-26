@@ -1,1 +1,2 @@
-# project-penguin
+# Project Penguin
+
