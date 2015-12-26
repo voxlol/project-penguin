@@ -24,6 +24,7 @@ module.exports = {
     loaders: [{
       test: /\.js$/,
       loaders: ['babel-loader'],
+      exclude: path.join(__dirname, 'node_modules')
     },
     {
       test: /\.scss$/,
