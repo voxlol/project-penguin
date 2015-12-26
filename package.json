@@ -6,7 +6,8 @@
     "build:webpack": "NODE_ENV=production webpack --config webpack.config.prod.js",
     "build": "npm run build:webpack",
     "start": "node devServer.js",
-    "lint": "eslint src"
+    "lint": "eslint src",
+    "test": "mocha spec --recursive --compilers js:babel-core/register"
   },
   "repository": {
     "type": "git",
@@ -43,9 +44,11 @@
     "bootstrap": "^3.3.6",
     "bootstrap-loader": "^1.0.1",
     "bootstrap-sass": "^3.3.6",
+    "chai": "^3.4.1",
     "imports-loader": "^0.6.5",
     "jquery": "^2.1.4",
     "lodash": "^3.10.1",
+    "mocha": "^2.3.4",
     "react": "^0.14.3",
     "react-dom": "^0.14.3",
     "resolve-url-loader": "^1.4.3"
