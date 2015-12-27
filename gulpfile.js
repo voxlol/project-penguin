@@ -51,7 +51,7 @@ gulp.task('build:api', ['clean:api'], function(){
 });
 
 // Build Frontend Task
-gulp.task('build:www', function(done){
+gulp.task('build:www', ['clean:www'], function(done){
   var webpackConfig = require('./webpack.config.' + (process.env.NODE_ENV === 'production' ? 'prod' : 'dev' ));
   webpack(webpackConfig, function(err, stats){
     if(err) {
