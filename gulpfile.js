@@ -67,9 +67,6 @@ gulp.task('test', function(){
     'spec/**/*.js'
   ],{ read: false })
   .pipe(mocha({ report: 'nyan' }))
-  .once('error', () => {
-    process.exit(1);
-  })
   .once('end', () => {
     process.exit();
   });
