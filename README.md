@@ -1,6 +1,7 @@
 Project Penguin
 ======
 [![Build Status](https://travis-ci.org/voxlol/project-penguin.svg?branch=master)](https://travis-ci.org/voxlol/project-penguin)
+
 Side project by Allen Chang [Github](https://www.github.com/voxlol)
 
 ### Goal
@@ -25,8 +26,8 @@ DB - MongoDB & InfluxDB
 Usage
 ======
     npm i
-    gulp start:front
-    gulp start:back
+    gulp start:frontend
+    gulp start:backend
 
 Run Tests
 ======
