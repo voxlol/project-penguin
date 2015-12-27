@@ -1,5 +1,5 @@
 import express from 'express';
-const router = express.Router();
+var router = express.Router();
 
 router.route('/')
 .all((req,res,next) => {

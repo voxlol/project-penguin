@@ -1,29 +1,24 @@
-var path = require('path');
-var express = require('express');
-var morgan = require('morgan');
-var bodyParser = require('body-parser');
+import path from 'path';
+import express from 'express';
+import morgan from 'morgan';
+import bodyParser from 'body-parser';
+import routes from './routes';
 
-var app = express();
+const app = express();
+const port = 3001;
 
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 
-var test = () => {
-  console.log('test');
-};
-
-test();
-test();
-
 // Load Routes
-// app.use(require('./controllers/routes'));
+routes(app);
 
 // Start the Dev Server
-app.listen(3001, 'localhost', function(err) {
+app.listen(port, 'localhost', (err) => {
   if (err) {
     console.log(err);
     return;
   }
 
-  console.log('Listening at http://localhost:2000');
+  console.log(`Listening at http://localhost:${port}`);
 });

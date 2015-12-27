@@ -1,23 +1,31 @@
 require('babel-core/register');
 
-var gulp = require('gulp');
-var nodemon = require('gulp-nodemon');
 var babel = require('gulp-babel');
-var sourceMaps = require('gulp-sourcemaps');
-var mocha = require('gulp-mocha');
+var del = require('del');
 var eslint = require('gulp-eslint');
+var gulp = require('gulp');
+var mocha = require('gulp-mocha');
+var nodemon = require('gulp-nodemon');
+var sourceMaps = require('gulp-sourcemaps');
 var shell = require('gulp-shell');
 
 // Starts the backend server
-gulp.task('start:back', ['build-backend', 'watch-backend']);
+gulp.task('start:backend', ['build-backend', 'watch-backend']);
 
 // Starts front-end dev server
-gulp.task('start:front', shell.task([
+gulp.task('start:frontend', shell.task([
   'node devServer.js'
 ]));
 
+// Cleans out backend build
+gulp.task('clean:backend', function(){
+  return del([
+    'api/build/**/*'
+  ]);
+});
+
 // Transpiles ES6 to ES5 on backend
-gulp.task('build-backend', function(){
+gulp.task('build-backend', ['clean:backend'], function(){
   return gulp.src([
     'api/**/*.js',
     '!api/build/**/*.js'
