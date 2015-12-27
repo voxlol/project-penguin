@@ -1,6 +1,7 @@
 require('babel-core/register');
 
 var babel = require('gulp-babel');
+var coveralls = require('gulp-coveralls');
 var del = require('del');
 var eslint = require('gulp-eslint');
 var gulp = require('gulp');
@@ -95,4 +96,11 @@ gulp.task('vet', function(d){
     .pipe(eslint())
     .pipe(eslint.format())
     .pipe(eslint.failAfterError());
+});
+
+// Code Coverage Task
+gulp.task('coveralls', function () {
+  if (!process.env.CI) return;
+  return gulp.src('./coverage/lcov.info')
+    .pipe(coveralls());
 });

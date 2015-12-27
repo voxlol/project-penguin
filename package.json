@@ -36,6 +36,7 @@
     "file-loader": "^0.8.5",
     "gulp": "^3.9.0",
     "gulp-babel": "^6.1.1",
+    "gulp-coveralls": "^0.1.4",
     "gulp-eslint": "^1.1.1",
     "gulp-mocha": "^2.2.0",
     "gulp-nodemon": "^2.0.4",
