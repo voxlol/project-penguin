@@ -8,24 +8,20 @@ var mocha = require('gulp-mocha');
 var nodemon = require('gulp-nodemon');
 var sourceMaps = require('gulp-sourcemaps');
 var shell = require('gulp-shell');
+var webpack = require('webpack');
 
-// Starts the backend server
-gulp.task('start:backend', ['build-backend', 'watch-backend']);
+// Start Backend Task
+gulp.task('start:backend', ['build:backend', 'watch-backend']);
 
-// Starts front-end dev server
-gulp.task('start:frontend', shell.task([
-  'node devServer.js'
-]));
-
-// Cleans out backend build
+// Clean Backend Task
 gulp.task('clean:backend', function(){
   return del([
     'api/build/**/*'
   ]);
 });
 
-// Transpiles ES6 to ES5 on backend
-gulp.task('build-backend', ['clean:backend'], function(){
+// Build Backend Task
+gulp.task('build:backend', ['clean:backend'], function(){
   return gulp.src([
     'api/**/*.js',
     '!api/build/**/*.js'
@@ -36,17 +32,36 @@ gulp.task('build-backend', ['clean:backend'], function(){
   .pipe(gulp.dest('./api/build'));
 });
 
-// Starts Nodemon watch on backend
-gulp.task('watch-backend', ['build-backend'], function(){
+// Run & Watch Backend Task
+gulp.task('watch-backend', ['build:backend'], function(){
   nodemon({
     script: 'api/build/server.js',
-    tasks: ['build-backend'],
+    tasks: ['build:backend'],
     ignore: ['api/build', 'dist', 'spec'],
     ext: 'js'
   });
 });
 
-// Runs mocha tests in /spec folder
+// Start Frontend Task
+gulp.task('start:frontend', shell.task([
+  'node devServer.js'
+]));
+
+// Build Frontend Task
+gulp.task('build:frontend', function(done){
+  var webpackConfig = require('./webpack.config.' + (process.env.NODE_ENV === 'production' ? 'prod' : 'dev' ));
+  webpack(webpackConfig, function(err, stats){
+    if(err) {
+      console.log('Error', err);
+    } else {
+      console.log(stats.toString());
+    }
+    done();
+  });
+});
+
+
+// Run Tests Task
 gulp.task('test', function(){
   return gulp.src([
     'spec/**/*.js'
@@ -54,7 +69,7 @@ gulp.task('test', function(){
   .pipe(mocha({ report: 'nyan' }));
 });
 
-// Runs Lint on project (frontend & backend)
+// Lint entire project Task
 gulp.task('vet', function(d){
   return gulp.src([
     '**/*.js',
