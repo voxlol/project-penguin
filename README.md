@@ -26,8 +26,13 @@ DB - MongoDB & InfluxDB
 Usage
 ======
     npm i
-    gulp start:frontend
-    gulp start:backend
+    gulp start:www
+    gulp start:api
+
+Build
+======
+    gulp build:api
+    gulp build:www
 
 Run Tests
 ======
