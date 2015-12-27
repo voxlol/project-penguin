@@ -6,6 +6,7 @@ notifications:
 before_script:
 - npm install -g gulp
 script:
-- gulp build:backend
+- gulp build:api
+- gulp build:www
 - gulp test
 - gulp vet

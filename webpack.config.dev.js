@@ -12,7 +12,7 @@ module.exports = {
     extensions: ['', '.js']
   },
   output: {
-    path: path.join(__dirname, 'dist'),
+    path: path.join(__dirname, 'build', 'www'),
     filename: 'bundle.js',
     publicPath: '/static/'
   },
