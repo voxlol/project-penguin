@@ -23,12 +23,13 @@ DB - MongoDB & InfluxDB
 Usage
 ======
     npm i
-    npm start
+    gulp start:front
+    gulp start:back
 
 Run Tests
 ======
-    npm test
+    gulp test
 
 Run Lint
 ======
-    npm run lint
+    gulp vet
