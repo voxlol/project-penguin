@@ -1,0 +1,11 @@
+language: node_js
+node_js:
+  - "4"
+notifications:
+  slack: sapphirelabs:LLDX2eajU4b5OKf0ZpEVFiup
+before_script:
+- npm install -g gulp
+script:
+- gulp build:backend
+- gulp test
+- gulp vet
