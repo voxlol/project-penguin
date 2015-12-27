@@ -1,8 +1,9 @@
 language: node_js
 node_js:
-  - "4"
+- '4'
 notifications:
-  slack: sapphirelabs:LLDX2eajU4b5OKf0ZpEVFiup
+  slack:
+    secure: wDyZ1HfCBcZh42Nu8sx5HpRR6w0xmuO9ayV7lKfxvdEoeatfGsqqJGtPE897iPTuqdUtgm2yvVarYUlV97JTBNaOraTHH0Crp43D83k/eLPTrZq6cmP3QJc5HWdoE/a/61/ZyeP/9/c3rQff3eLGX6Cp9BxOGLdEFBiYAb89GgzBCgPJ5rPw/tYkiiD5zwukPeKqngzvCUmq4CC0eoS1F3TJbcN6KrmQpHwxIOYKOpDSeNNlVlIq/SSxdLENebyVunvSpVBGFhepRtbEojJM2TtlwnTSHyiius4KkoOnN2orOOZJ4Sw9kpzE2HM59N/JyptZ6CDHIxBQ3I7C7ztQtTbiWbebyEaYGkfokLmQhuWUZsQG//ThC2Cz+UuAnA0IqQan/xU3+6bSs4yc/imv2N/AuxIR44NR+etb4a/VDiDxoIYnRPOGGr866Jx92kv9AuG9aCMZz5/zgbTjbWV3woA4hc0jWk5SGnAzQzYaqZ+VeR1NvFklgHqN/Z1KFdpFVW8i8KAnTYsVmD9fAp5OF7YbLWvWvr6ZkHLcXmQW3FYmQHRHN8WIDIu70VVy8blHQyagMSsTRxg1Xlqxo5W8gJeqyklSCndwibxyaSpRncwonUOuzE/2OiUllHbXL+yjctmA+3FJiWptHROf7RPYqZWYgqX58irvUScW1A5m8Rw=
 before_script:
 - npm install -g gulp
 script:
