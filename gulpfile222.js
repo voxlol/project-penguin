@@ -10,11 +10,44 @@ var sourceMaps = require('gulp-sourcemaps');
 var shell = require('gulp-shell');
 var webpack = require('webpack');
 var path = require('path');
+var istanbul = require('gulp-istanbul');
+var isparta = require('isparta');
+var runSequence = require('run-sequence');
 
 var buildpath = {
   www: path.join(__dirname, 'build', 'www'),
   api: path.join(__dirname, 'build', 'api'),
 };
+
+var srctest = 'test/**/.js';
+
+gulp.task('coverage:instrument', function() {
+  return gulp.src(srctest)
+    .pipe(istanbul({
+      instrumenter: isparta.Instrumenter // Use the isparta instrumenter (code coverage for ES6)
+      // Istanbul configuration (see https://github.com/SBoudrias/gulp-istanbul#istanbulopt)
+      // ...
+    }))
+    .pipe(istanbul.hookRequire()); // Force `require` to return covered files
+});
+
+
+
+gulp.task('istanbul', function () {
+  return gulp.src(['test/**/*.js'])
+    .pipe(babel())
+    .pipe(istanbul({
+      instrumenter: isparta.Instrumenter
+    }))
+    .pipe(istanbul.hookRequire())
+    .pipe(mocha({
+      reporter: 'spec'
+    }))
+    // Creating the reports after tests ran
+    .pipe(istanbul.writeReports())
+    // Enforce a coverage of at least 90%
+    .pipe(istanbul.enforceThresholds({ thresholds: { global: 90 } }));
+});
 
 // Start Backend Task
 gulp.task('start:api', ['build:api', 'watch:api']);

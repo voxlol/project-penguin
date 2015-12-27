@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 routes(app);
 
 // Start the Dev Server
-app.listen(port, 'localhost', (err) => {
+var openServer = app.listen(port, 'localhost', (err) => {
   if (err) {
     console.log(err);
     return;
@@ -23,4 +23,4 @@ app.listen(port, 'localhost', (err) => {
   console.log(`Listening at http://localhost:${port}`);
 });
 
-export default app;
+export default openServer;
