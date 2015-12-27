@@ -66,7 +66,13 @@ gulp.task('test', function(){
   return gulp.src([
     'spec/**/*.js'
   ],{ read: false })
-  .pipe(mocha({ report: 'nyan' }));
+  .pipe(mocha({ report: 'nyan' }))
+  .once('error', () => {
+    process.exit(1);
+  })
+  .once('end', () => {
+    process.exit();
+  });
 });
 
 // Lint entire project Task
