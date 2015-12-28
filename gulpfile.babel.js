@@ -13,16 +13,51 @@ var sourceMaps = require('gulp-sourcemaps');
 var shell = require('gulp-shell');
 var webpack = require('webpack');
 var path = require('path');
-
+var istanbulTraceur = require('istanbul-traceur');
 var buildpath = {
   www: path.join(__dirname, 'build', 'www'),
   api: path.join(__dirname, 'build', 'api'),
 };
 
-
+gulp.task('jsx-coverage', require('gulp-jsx-coverage').createTask({
+    src: ['test/**/*.js'],  // will pass to gulp.src as mocha tests 
+    isparta: true,                                  // use istanbul as default 
+    istanbul: {                                      // will pass to istanbul or isparta 
+        preserveComments: true,                       // required for istanbul 0.4.0+ 
+        coverageVariable: '__MY_TEST_COVERAGE__',
+        exclude: /node_modules|test[0-9]|build/            // do not instrument these files 
+    },
+ 
+    threshold: 80,                                   // fail the task when coverage lower than this 
+                                                     // default is no threshold 
+    thresholdType: 'functions',                      // one of 'lines', 'statements', 'functions', 'banches' 
+                                                     // default is 'lines' 
+ 
+    transpile: {                                     // this is default whitelist/blacklist for transpilers 
+        babel: {
+            include: /\.jsx?$/,
+            exclude: /node_modules/,
+            omitExt: false                           // if you wanna omit file ext when require(), put an array 
+        }
+    },
+    coverage: {
+        reporters: ['text-summary', 'json', 'lcov'], // list of istanbul reporters 
+        directory: 'coverage'                        // will pass to istanbul reporters 
+    },
+    mocha: {                                         // will pass to mocha 
+        reporter: 'spec'
+    },
+ 
+    // Recommend moving this to .babelrc 
+    babel: {                                         // will pass to babel-core 
+        presets: ['es2015', 'react'],                // Use proper presets or plugins for your scripts 
+        sourceMap: 'both'                            // get hints in covarage reports or error stack 
+    }
+  })
+);
 // Generate Test Coverage Task
 gulp.task('coverage', function (done) { 
-  return gulp.src(['api/**/*.js', 'src/**/*.js'])
+  gulp.src(['api/**/*.js', 'src/**/*.js'])
     .pipe(istanbul({
       instrumenter: Instrumenter,
       includeUntested: true
@@ -32,7 +67,7 @@ gulp.task('coverage', function (done) {
       gulp.src(['test/**/*.js'], { read: false })
         .pipe(plumber())
         .pipe(mocha({
-          reporter: 'mocha-lcov-reporter'
+          reporter: 'spec'
         }))
         .pipe(istanbul.writeReports())
         .pipe(istanbul.enforceThresholds({ thresholds: { global: 80 } }))
@@ -44,7 +79,7 @@ gulp.task('coverage', function (done) {
     });
 });
 
-gulp.task('coveralls', ['coverage'], function(){
+gulp.task('coveralls', ['jsx-coverage'], function(){
   return gulp.src('coverage/lcov.info')
     .pipe(coveralls());
 });
