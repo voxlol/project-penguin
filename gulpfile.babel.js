@@ -45,7 +45,7 @@ gulp.task('jsx-coverage', require('gulp-jsx-coverage').createTask({
         directory: 'coverage'                        // will pass to istanbul reporters 
     },
     mocha: {                                         // will pass to mocha 
-        reporter: 'spec'
+        reporter: 'mocha-lcov-reporter'
     },
  
     // Recommend moving this to .babelrc 
