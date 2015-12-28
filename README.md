@@ -1,7 +1,7 @@
 Project Penguin
 ======
-[![Build Status](https://travis-ci.org/voxlol/project-penguin.svg?branch=master)](https://travis-ci.org/voxlol/project-penguin)
 
+[![Build Status](https://travis-ci.org/voxlol/project-penguin.svg?branch=master)](https://travis-ci.org/voxlol/project-penguin)
 [![Coverage Status](https://coveralls.io/repos/voxlol/project-penguin/badge.svg?branch=coveralls_2&service=github)](https://coveralls.io/github/voxlol/project-penguin?branch=coveralls_2)
 
 Side project by Allen Chang [Github](https://www.github.com/voxlol)
