@@ -6,6 +6,6 @@ describe('/mock endpoint', () => {
   it('GET responds with 200', (done) => {
     request(app)
       .get('/api/mock')
-      .expect(200, done);
+      .expect(200, done());
   });
 });
