@@ -80,7 +80,7 @@ gulp.task('coverage', function (done) {
 });
 
 gulp.task('coveralls', ['jsx-coverage'], function(){
-  return gulp.src('coverage/lcov.info')
+  gulp.src('coverage/lcov.info')
     .pipe(coveralls());
 });
 
