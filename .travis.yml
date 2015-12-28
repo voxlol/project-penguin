@@ -12,3 +12,5 @@ script:
 - gulp build:www
 - gulp test
 - gulp vet
+after_script:
+- gulp coveralls

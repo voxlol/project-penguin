@@ -1,3 +1,8 @@
+import { Instrumenter } from 'isparta';
+import istanbul from 'gulp-istanbul';
+import coveralls from 'gulp-coveralls';
+import plumber from 'gulp-plumber';
+
 var babel = require('gulp-babel');
 var del = require('del');
 var eslint = require('gulp-eslint');
@@ -13,6 +18,36 @@ var buildpath = {
   www: path.join(__dirname, 'build', 'www'),
   api: path.join(__dirname, 'build', 'api'),
 };
+
+
+// Generate Test Coverage Task
+gulp.task('coverage', function (done) { 
+  return gulp.src(['api/**/*.js', 'src/**/*.js'])
+    .pipe(istanbul({
+      instrumenter: Instrumenter,
+      includeUntested: true
+    }))
+    .pipe(istanbul.hookRequire())
+    .on('finish', () => {
+      gulp.src(['test/**/*.js'], { read: false })
+        .pipe(plumber())
+        .pipe(mocha({
+          reporter: 'mocha-lcov-reporter'
+        }))
+        .pipe(istanbul.writeReports())
+        .pipe(istanbul.enforceThresholds({ thresholds: { global: 80 } }))
+        .on('error', function(err){
+          console.log(err);
+          process.exit(1);
+        })
+        .on('end', done);
+    });
+});
+
+gulp.task('coveralls', function(){
+  return gulp.src('coverage/lcov.info')
+    .pipe(coveralls());
+});
 
 // Start Backend Task
 gulp.task('start:api', ['build:api', 'watch:api']);
