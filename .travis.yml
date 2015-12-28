@@ -7,8 +7,10 @@ notifications:
       secure: DA9A6gcy7fq0dxqmEHmPg6Lk0nbtB5W7b76ovtzcIJXEw3yqA1jm39XDj4liaXNSUiOStboUy9opKn0TzYcjlCyXGuIIz/XYCf8z/tLc4PeI1A7gC/r3CLv5HT8TERhThpqXHhnwd6x12PjnISftPXtv4gY+XmNca/u2UsehRtPgvArImu9+DXiUmZ3d/sMsnJS6S5UEnxnrgICx/Z5jCHROEy2ShWaBDuMWdPV6GwBroUrGEr9AtbmQFUIeHN+XQyCLAy5GMpk0XTJcNt+TYDnIiDt7mqiFNQZaF7B/Oix8JnbNIOIzIxO5noWh+u2akzVb3IBCaXx97kKXUv5YeP96dWflj1AYxftzJe9iKBKSzP3NLCkMKJJm0irymoAFnpilAKzTluUgJVSlcU4GmQxfgEIzYPTYgui631YAiUzg8dxveL5/Gj9yqLkh2YLPhO+Q2HIXVjtgItMtPZ4yO5VycNkb5S3fMu9atVG7umXeEoLfaLMuGPoknJlhdzOhb60BY3Mf9Hxl89Sft+FW/pgVEBTplWIStu+ZKqZjf+t/LHUGu/ZfDkvxq5Nck+Jsbmuj6cWtO8FkhgQOhjINPsYHmlpr+ZmEpnm4+gjEwXZVciNElXaY4kMLYe6sRsuA1aKSQWPNM4McSBLDTzwesDEbk2gj7NPsE4g17A4GKx8=
 before_script:
 - npm install -g gulp
+- npm install -g babel-cli
 script:
 - gulp build:api
 - gulp build:www
-- gulp test
 - gulp vet
+after_script:
+- babel-node ./node_modules/.bin/isparta cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage
