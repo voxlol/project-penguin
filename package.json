@@ -28,6 +28,7 @@
     "blanket": "^1.2.1",
     "bootstrap-loader": "^1.0.1",
     "chai": "^3.4.1",
+    "coveralls": "^2.11.6",
     "css-loader": "^0.23.1",
     "del": "^2.2.0",
     "eslint": "^1.10.3",
