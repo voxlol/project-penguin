@@ -6,7 +6,7 @@ module.exports = {
   entry: [
     'bootstrap-loader',
     'webpack-hot-middleware/client',  // Lets HMR know to re-render
-    './src/index'
+    './www/index'
   ],
   resolve: {
     extensions: ['', '.js']
