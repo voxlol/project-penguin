@@ -7,6 +7,10 @@ router.route('/')
 })
 .get((req,res,next) => {
   res.send('Gotcha!');
+})
+.post((req, res, next) => {
+  console.log('huh?');
+  res.send('ok');
 });
 
 export default router;
