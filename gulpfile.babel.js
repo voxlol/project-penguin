@@ -1,5 +1,3 @@
-require('babel-core/register');
-
 var babel = require('gulp-babel');
 var del = require('del');
 var eslint = require('gulp-eslint');
@@ -68,7 +66,7 @@ gulp.task('watch:api', ['build:api'], function(){
   nodemon({
     script: buildpath.api + '/server.js',
     tasks: ['build:api'],
-    ignore: [buildpath.api, buildpath.www, 'spec'],
+    ignore: [buildpath.api, buildpath.www, 'test'],
     ext: 'js'
   });
 });
@@ -76,7 +74,7 @@ gulp.task('watch:api', ['build:api'], function(){
 // Run Tests Task
 gulp.task('test', function(){
   return gulp.src([
-    'spec/**/*.js'
+    'test/**/*.js'
   ],{ read: false })
   .pipe(mocha({ report: 'nyan' }))
   .once('end', () => {
