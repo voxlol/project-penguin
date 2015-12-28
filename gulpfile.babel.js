@@ -14,6 +14,7 @@ var shell = require('gulp-shell');
 var webpack = require('webpack');
 var path = require('path');
 var istanbulTraceur = require('istanbul-traceur');
+
 var buildpath = {
   www: path.join(__dirname, 'build', 'www'),
   api: path.join(__dirname, 'build', 'api'),
@@ -109,7 +110,7 @@ gulp.task('clean:www', function(){
 // Build api Task
 gulp.task('build:api', ['clean:api'], function(){
   return gulp.src([
-    'api/**/*.js',
+    'src/api/**/*.js',
     '!' + buildpath.api + '/**/*.js'
   ])
   .pipe(sourceMaps.init())

@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import request from 'supertest';
-import app from '~/api/server.js';
+import app from '~/src/api/server.js';
 
 describe('/mock endpoint', () => {
   it('GET responds with 200', (done) => {
