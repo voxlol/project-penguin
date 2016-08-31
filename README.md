@@ -1,4 +1,4 @@
-Project Penguin
+Project Penguin - test
 ======
 
 [![Build Status](https://travis-ci.org/voxlol/project-penguin.svg?branch=master)](https://travis-ci.org/voxlol/project-penguin)
